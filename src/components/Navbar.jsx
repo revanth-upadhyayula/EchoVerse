@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient.js";
-import { HomeIcon, PlusIcon, CogIcon, ArrowRightOnRectangleIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  ChartBarIcon,
+  PlusIcon,
+  CogIcon,
+  ArrowRightOnRectangleIcon,
+  Bars3Icon,
+  XMarkIcon
+} from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +38,7 @@ export default function Navbar() {
 
         {/* Hamburger Menu Icon for small screens */}
         <div className="sm:hidden">
-          <button onClick={toggleMenu} className="text-white  focus:outline-none">
+          <button onClick={toggleMenu} className="text-white focus:outline-none">
             {isMenuOpen ? (
               <XMarkIcon className="w-6 h-6" />
             ) : (
@@ -46,22 +54,29 @@ export default function Navbar() {
           } sm:flex flex-col sm:flex-row sm:items-center absolute sm:static top-14 left-0 w-full sm:w-auto bg-gradient-to-r from-deep-blue to-midnight-blue sm:bg-none p-4 sm:p-0 sm:gap-4 font-poppins`}
         >
           <Link
-            to="/dashboard"
-            className="text-white  font-medium hover:text-white px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            to="/"
+            className="text-white font-medium hover:text-sky-blue px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
             onClick={() => setIsMenuOpen(false)}
           >
-            <HomeIcon className="w-4 h-4 sm:w-5 sm:h-5" /> Dashboard
+            <HomeIcon className="w-4 h-4 sm:w-5 sm:h-5" /> Home
+          </Link>
+          <Link
+            to="/dashboard"
+            className="text-white font-medium hover:text-sky-blue px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <ChartBarIcon className="w-4 h-4 sm:w-5 sm:h-5" /> Dashboard
           </Link>
           <Link
             to="/record"
-            className="text-white  font-medium hover:text-white px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            className="text-white font-medium hover:text-sky-blue px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
             onClick={() => setIsMenuOpen(false)}
           >
             <PlusIcon className="w-4 h-4 sm:w-5 sm:h-5" /> New Entry
           </Link>
           <Link
             to="/settings"
-            className="text-white  font-medium hover:text-white px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            className="text-white font-medium hover:text-sky-blue px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
             onClick={() => setIsMenuOpen(false)}
           >
             <CogIcon className="w-4 h-4 sm:w-5 sm:h-5" /> Settings
@@ -71,7 +86,7 @@ export default function Navbar() {
               handleLogout();
               setIsMenuOpen(false);
             }}
-            className="text-white  font-medium hover:text-text-dark px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            className="text-white font-medium hover:text-sky-blue px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
           >
             <ArrowRightOnRectangleIcon className="w-4 h-4 sm:w-5 sm:h-5" /> Logout
           </button>

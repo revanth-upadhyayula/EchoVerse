@@ -7,6 +7,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
+  const [showVerifyPopup, setShowVerifyPopup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,8 +17,10 @@ export default function AuthPage() {
       result = await supabase.auth.signInWithPassword({ email, password });
     } else {
       result = await supabase.auth.signUp({ email, password });
+      if (result.data.user && !result.data.session) {
+        setShowVerifyPopup(true);
+      }
     }
-    console.log(result);
     if (result.error) setError(result.error.message);
   };
 
@@ -55,7 +58,7 @@ export default function AuthPage() {
               />
             </div>
             <button
-              className="w-full bg-gradient-to-r from-deep-blue to-sky-blue text-text-dark py-3 rounded-lg font-semibold hover:bg-gradient-to-l transition-all duration-300 flex items-center justify-center gap-2 animate-pulse-glow text-sm sm:text-base"
+              className="w-full bg-gradient-to-r from-deep-blue to-sky-blue text-white py-3 rounded-lg font-semibold hover:bg-gradient-to-l transition-all duration-300 flex items-center justify-center gap-2 animate-pulse-glow text-sm sm:text-base"
               type="submit"
             >
               <ArrowRightCircleIcon className="w-5 h-5" />
@@ -74,6 +77,20 @@ export default function AuthPage() {
           </div>
         </div>
       </div>
+      {showVerifyPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-8 shadow-lg text-center max-w-xs">
+            <h2 className="text-xl font-bold mb-4 text-text-dark">Verify Your Email</h2>
+            <p className="mb-4 text-text-dark">Check your email and click the verification link to activate your account.</p>
+            <button
+              className="mt-2 px-4 py-2 bg-sky-blue text-white rounded font-semibold"
+              onClick={() => setShowVerifyPopup(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
