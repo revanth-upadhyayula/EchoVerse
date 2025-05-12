@@ -17,6 +17,7 @@ export default function AuthPage() {
     } else {
       result = await supabase.auth.signUp({ email, password });
     }
+    console.log(result);
     if (result.error) setError(result.error.message);
   };
 

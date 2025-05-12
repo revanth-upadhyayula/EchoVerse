@@ -53,7 +53,7 @@ export default function Dashboard() {
           </div>
         ) : timeCapsule ? (
           <div className="text-center py-12 bg-white/5 backdrop-blur-md rounded-lg shadow-md border border-sky-blue/20">
-            <p className="text-gray-300 text-sm sm:text-base">
+            <p className="text-gray-1000 text-sm sm:text-base">
               Time Capsule Mode is ON. All your entries are hidden until 1 year from now.
             </p>
           </div>
